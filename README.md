@@ -7,8 +7,9 @@ project from the idea all the way to production for a real client, and I care as
 much about data consistency, security and edge cases as I do about shipping
 features.
 
-- **Currently:** Building **VIZIO**, a booking app now in production for a barbershop in Córdoba, Argentina (Angular + Node/Express + PostgreSQL).
+- **Currently:** Technical Support at **Encode S.A.** (1+ year), while building **VIZIO**, a booking app now in production for a barbershop in Córdoba, Argentina (Angular + Node/Express + PostgreSQL).
 - **Education:** Studying a *Software Development Technical Degree* — **100% merit-based scholarship** covering the full year.
+- **Previously:** Shadowing internship at **Encode S.A.** — spent time alongside developers, Product Owner and Scrum roles, seeing how they work day to day.
 - **Also:** Backend + QA on **Sistema Administrativo CACC**, a management platform for a sports club, built with a team (.NET 10 + Angular).
 
 ## Technical Stack
