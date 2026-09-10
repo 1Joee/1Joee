@@ -8,7 +8,7 @@ much about data consistency, security and edge cases as I do about shipping
 features.
 
 - **Currently:** Building **VIZIO**, a booking app now in production for a barbershop in Córdoba, Argentina (Angular + Node/Express + PostgreSQL).
-- **Education:** Studying *Software Development Technical Degree* (3rd year, terciario) — **100% merit-based scholarship** covering the full year.
+- **Education:** Studying a *Software Development Technical Degree* — **100% merit-based scholarship** covering the full year.
 - **Also:** Backend + QA on **Sistema Administrativo CACC**, a management platform for a sports club, built with a team (.NET 10 + Angular).
 
 ## Technical Stack
