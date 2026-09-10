@@ -2,10 +2,12 @@
 
 ## About Me
 
-I am a **Full Stack Developer** focused on modern web ecosystems. I like taking a
-project from the idea all the way to production for a real client, and I care as
-much about data consistency, security and edge cases as I do about shipping
-features.
+I am a **Full Stack Developer** and this whole field is what I'm passionate about —
+especially **server and infrastructure** work. I love building products that bring
+real value to society, taking them from the idea all the way to production for a
+real client, and doing it **without ever cutting corners on security**, which I
+consider the most important part. I care as much about data consistency,
+infrastructure and edge cases as I do about shipping features.
 
 - **Currently:** Technical Support at **Encode S.A.** (1+ year), while building **VIZIO**, a booking app now in production for a barbershop in Córdoba, Argentina (Angular + Node/Express + PostgreSQL).
 - **Education:** Studying a *Software Development Technical Degree* — **100% merit-based scholarship** covering the full year.
