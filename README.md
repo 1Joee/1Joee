@@ -41,7 +41,6 @@ Community). Team project — I work on the **backend** and as **QA**.
 
 - **The Stack:** .NET 10 Web API (C#), layered solution (`ApiGestion → DaoLibrary → EntityLibrary`), raw ADO.NET with parameterized queries, SQL Server, Angular 22, JWT, Vitest.
 - **The Solution:** Centralizes the club's administration, finances and sports management in one platform, with role-separated portals so administrative staff, coaches and members each see only what's relevant to them. Replaces spreadsheets with dues and payment tracking, member and staff records, and executive dashboards that give the board real KPIs (dues collected, overdue payments, active players) to make decisions.
-- **My Role:** Backend endpoints and **QA / security review** — testing the UI, and identifying and classifying security findings by severity (plaintext passwords, secrets committed to the repo), documented in `QA-BUGS-Y-SEGURIDAD.md`, with secrets moved out of the codebase into `dotnet user-secrets`.
 
 ## What I've Learned
 
