@@ -30,9 +30,8 @@ infrastructure and edge cases as I do about shipping features.
 Appointment booking app **in production** for the VIZIO barbershop (Córdoba, Argentina).
 Clients book from a landing page; each barber logs in to manage their day and earnings.
 
-- **The Stack:** Angular 21 (signals, zoneless, standalone components), Node.js, Express, TypeScript, PostgreSQL (Supabase), Prisma, JWT, Resend.
-- **The Solution:** Per-barber availability — two appointments at the same time are valid as long as they belong to different barbers. Client identity is resolved by a **unique phone number**: without that constraint, two rows with the same phone made a booking resolve to whichever row Postgres picked, so the appointment showed up under the wrong person — fixed with a unique constraint plus a migration that consolidated the existing duplicates. Layered Express backend (routes → controllers → services) with centralized async error handling and typed environment helpers.
-- **Extras:** 5-step booking wizard (service → barber → day & time → details → confirmation), barber dashboard with JWT-protected login, daily agenda with appointment states, earnings summary broken down by service and month, transactional emails to the client and to the chosen barber (with a copy to the owner). Frontend deployed on **Vercel**, backend on **Railway**.
+- **The Stack:** Angular 21 (signals, zoneless, standalone components), Node.js, Express, TypeScript, PostgreSQL (Supabase), Prisma, JWT, Resend, deployed on Vercel + Railway.
+- **The Solution:** Replaces phone-and-paper booking with a self-service flow that works 24/7. Clients book in a 5-step wizard (service → barber → day & time → details → confirmation), each barber has their own agenda and availability, and everyone gets an automatic confirmation email — the client and the chosen barber, with a copy to the owner. Barbers log in to see the day ordered by time and a per-service earnings breakdown by day and month. The result: fewer no-shows, no double-booking, and the owner has real numbers on the business instead of guesswork.
 
 ## Featured Project: Sistema Administrativo CACC — Sports Club Management
 
@@ -40,9 +39,9 @@ Web platform for the Club Atlético Camioneros: financial administration, member
 control and sports management, with role-separated portals (Administrative, Sports,
 Community). Team project — I work on the **backend** and as **QA**.
 
-- **The Stack:** .NET 10 Web API (C#), 3-project layered solution (`ApiGestion → DaoLibrary → EntityLibrary`), raw ADO.NET (`Microsoft.Data.SqlClient`) with parameterized queries — no ORM, no EF. SQL Server, Angular 22, Vitest, JWT.
-- **My Role:** Backend endpoints (controller pattern `api/[controller]`, DAOs with parameterized SQL) and QA. QA work is documented in `QA-BUGS-Y-SEGURIDAD.md`: fixed UI bugs — a browser's native password icon overlapping the app's custom show/hide toggle (fixed with z-index + hiding the native pseudo-elements), a broken test suite caused by an import of a class that didn't exist, and a dead "remember me" checkbox now wired to `localStorage`.
-- **Security Review:** Identified and classified findings by severity — plaintext passwords, a hardcoded admin password and a hardcoded JWT signing key committed in versioned files. Documented that removing a secret from the code does **not** remove it from git history (the key has to be treated as compromised and rotated), generated a new key and moved it to `dotnet user-secrets`, outside the repo.
+- **The Stack:** .NET 10 Web API (C#), layered solution (`ApiGestion → DaoLibrary → EntityLibrary`), raw ADO.NET with parameterized queries, SQL Server, Angular 22, JWT, Vitest.
+- **The Solution:** Centralizes the club's administration, finances and sports management in one platform, with role-separated portals so administrative staff, coaches and members each see only what's relevant to them. Replaces spreadsheets with dues and payment tracking, member and staff records, and executive dashboards that give the board real KPIs (dues collected, overdue payments, active players) to make decisions.
+- **My Role:** Backend endpoints and **QA / security review** — testing the UI, and identifying and classifying security findings by severity (plaintext passwords, secrets committed to the repo), documented in `QA-BUGS-Y-SEGURIDAD.md`, with secrets moved out of the codebase into `dotnet user-secrets`.
 
 ## What I've Learned
 
