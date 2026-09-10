@@ -56,6 +56,21 @@ Community). Team project — I work on the **backend** and as **QA**.
 - **Real deployment** on Vercel + Railway, including Prisma engine config for the Linux musl runtime
 - Working both **solo** and **on a team with defined roles**, using branches, PRs and atomic commits
 
+## Client Work in Production
+
+- **VIZIO Barbershop** — [viizio.com.ar](https://www.viizio.com.ar/)
+  Booking platform live and in daily use at a barbershop in Córdoba, Argentina.
+  Clients self-book 24/7 through a 5-step wizard; each barber manages their own
+  agenda, and reservations trigger automatic confirmation emails to the client
+  and the assigned barber. Barbers log in to a private dashboard with the day's
+  schedule and a per-service earnings breakdown by day and month.
+  Angular + Node/Express + PostgreSQL, deployed on Vercel and Railway.
+
+- **Sistema Administrativo CACC** — *in development.*
+  Management platform for the Club Atlético Camioneros: dues and payment tracking,
+  member and staff records, and executive dashboards with role-separated portals.
+  .NET 10 + Angular, built with a team.
+
 ## Let's Connect!
 
 - **Email:** yoelgalera77@gmail.com
