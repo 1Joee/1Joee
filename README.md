@@ -1,116 +1,62 @@
-# Portfolio Full-Stack — Joel Galera
+# Hi there, I'm Joel Galera!
 
-Desarrollador full-stack (Córdoba, Argentina). Segundo año de Ingeniería/Tecnicatura
-en Software. Acá resumo los dos proyectos full-stack en los que vengo trabajando,
-el stack de cada uno y las aptitudes que fui aprendiendo en el proceso.
+## About Me
 
-| Proyecto | Rol | Estado | Stack | Repo |
-|---|---|---|---|---|
-| **VIZIO — App de Turnos** | Full-stack (solo) | En producción / deploy-ready | Angular 21 · Node/Express · PostgreSQL · Prisma | https://github.com/1Joee/VIZIO |
-| **Sistema Administrativo CACC** | Backend + QA en equipo | En desarrollo | .NET 10 Web API · Angular 22 · SQL Server | https://github.com/Atzur1/Sistema-Administrativo---CACC |
+I am a **Full Stack Developer** focused on modern web ecosystems. I like taking a
+project from the idea all the way to production for a real client, and I care as
+much about data consistency, security and edge cases as I do about shipping
+features.
 
----
+- **Currently:** Building **VIZIO**, a booking app now in production for a barbershop in Córdoba, Argentina (Angular + Node/Express + PostgreSQL).
+- **Education:** Studying *Software Development Technical Degree* (3rd year, terciario) — **100% merit-based scholarship** covering the full year.
+- **Also:** Backend + QA on **Sistema Administrativo CACC**, a management platform for a sports club, built with a team (.NET 10 + Angular).
 
-## 1. VIZIO — App de reserva de turnos para una barbería
+## Technical Stack
 
-App real para la barbería VIZIO (Córdoba). El cliente reserva turno desde una
-landing con un wizard de 5 pasos; el barbero entra con login y gestiona la
-agenda del día y sus ganancias.
+| Category | Tools & Technologies |
+|---|---|
+| **Frontend** | Angular (signals, zoneless, standalone components), TypeScript, JavaScript, HTML, CSS |
+| **Backend & DB** | Node.js, Express, .NET 10 (C# / ASP.NET Core), PostgreSQL, SQL Server, Prisma, ADO.NET |
+| **Infrastructure** | Vercel, Railway, Supabase, environment-based configuration |
+| **Auth & Security** | JWT, bcrypt, Helmet, express-rate-limit, origin-restricted CORS, dotnet user-secrets |
+| **Services & Tools** | Resend (transactional email), Git & GitHub, Swagger |
+| **Quality & QA** | Vitest, manual QA, security review & vulnerability triage |
 
-### Stack
+## Featured Project: VIZIO — Barbershop Booking App
 
-- **Frontend:** Angular 21 — standalone components, **signals**, modo **zoneless**, routing con guards
-- **Backend:** Node.js + **Express** + **TypeScript**, arquitectura por capas (routes → controllers → services)
-- **Base de datos:** PostgreSQL en **Supabase**
-- **ORM:** **Prisma** (schema, migraciones versionadas, seed)
-- **Auth:** **JWT** (expiración 24 h), contraseñas con **bcrypt**
-- **Emails transaccionales:** **Resend** (confirmación al cliente + aviso al barbero elegido con copia al dueño)
-- **Hardening:** **Helmet**, **express-rate-limit**, **CORS** restringido por origen
-- **Deploy:** Frontend en **Vercel**, backend en **Railway**, variables de entorno separadas por plataforma
+Appointment booking app **in production** for the VIZIO barbershop (Córdoba, Argentina).
+Clients book from a landing page; each barber logs in to manage their day and earnings.
 
-### Funcionalidades
+- **The Stack:** Angular 21 (signals, zoneless, standalone components), Node.js, Express, TypeScript, PostgreSQL (Supabase), Prisma, JWT, Resend.
+- **The Solution:** Per-barber availability — two appointments at the same time are valid as long as they belong to different barbers. Client identity is resolved by a **unique phone number**: without that constraint, two rows with the same phone made a booking resolve to whichever row Postgres picked, so the appointment showed up under the wrong person — fixed with a unique constraint plus a migration that consolidated the existing duplicates. Layered Express backend (routes → controllers → services) with centralized async error handling and typed environment helpers.
+- **Extras:** 5-step booking wizard (service → barber → day & time → details → confirmation), barber dashboard with JWT-protected login, daily agenda with appointment states, earnings summary broken down by service and month, transactional emails to the client and to the chosen barber (with a copy to the owner). Frontend deployed on **Vercel**, backend on **Railway**.
 
-- Wizard de reserva: servicio → barbero → día y horario → datos → confirmación
-- Disponibilidad por barbero (dos turnos a la misma hora son válidos si son de barberos distintos)
-- Agenda del día con estados de turno (pendiente / confirmado / atendido / cancelado)
-- Resumen de ganancias del día y selector por mes, con desglose por servicio
-- Validación de teléfono, identidad del cliente por teléfono único
-- Emails automáticos al reservar
+## Featured Project: Sistema Administrativo CACC — Sports Club Management
 
-### Aptitudes que aprendí acá
+Web platform for the Club Atlético Camioneros: financial administration, member
+control and sports management, with role-separated portals (Administrative, Sports,
+Community). Team project — I work on the **backend** and as **QA**.
 
-- Diseñar y construir una app **full-stack de punta a punta** yo solo, para un cliente real
-- **Modelado de datos relacional** con Prisma: relaciones, enums, índices, `@unique`, y por qué un constraint faltante hace que una reserva termine a nombre de otra persona
-- **Migraciones de base de datos** con datos existentes: columnas nullable, consolidar duplicados antes de aplicar un constraint
-- Escribir un **backend en capas** en Express/TypeScript, con manejo centralizado de errores (`async-handler`) y helpers de entorno tipados
-- Implementar **autenticación con JWT** desde cero: firma, middleware de verificación, expiración, guard en el frontend
-- **Angular moderno**: signals, zoneless, componentes standalone, servicios HTTP, pipes y mappers API↔modelo
-- Integrar **servicios externos** (Resend) de forma tolerante a fallos (si falta la API key, se omite el envío en vez de romper)
-- **Seguridad práctica**: secretos fuera del código, CORS por origen, rate limiting, headers con Helmet
-- **Deploy real** en Vercel + Railway y config del engine de Prisma para el runtime Linux musl
+- **The Stack:** .NET 10 Web API (C#), 3-project layered solution (`ApiGestion → DaoLibrary → EntityLibrary`), raw ADO.NET (`Microsoft.Data.SqlClient`) with parameterized queries — no ORM, no EF. SQL Server, Angular 22, Vitest, JWT.
+- **My Role:** Backend endpoints (controller pattern `api/[controller]`, DAOs with parameterized SQL) and QA. QA work is documented in `QA-BUGS-Y-SEGURIDAD.md`: fixed UI bugs — a browser's native password icon overlapping the app's custom show/hide toggle (fixed with z-index + hiding the native pseudo-elements), a broken test suite caused by an import of a class that didn't exist, and a dead "remember me" checkbox now wired to `localStorage`.
+- **Security Review:** Identified and classified findings by severity — plaintext passwords, a hardcoded admin password and a hardcoded JWT signing key committed in versioned files. Documented that removing a secret from the code does **not** remove it from git history (the key has to be treated as compromised and rotated), generated a new key and moved it to `dotnet user-secrets`, outside the repo.
 
----
+## What I've Learned
 
-## 2. Sistema Administrativo CACC — Club Atlético Camioneros
+- Building a **full-stack app end to end**, solo, for a real paying client
+- **Relational data modeling** with Prisma — relations, enums, indexes, unique constraints, and why a missing one corrupts a booking
+- **Database migrations over existing data** — nullable columns, consolidating duplicates before applying a constraint
+- **JWT authentication from scratch** — signing, verification middleware, expiration, route guards on the frontend
+- **Modern Angular** — signals, zoneless change detection, standalone components, HTTP services, API↔model mappers
+- **Layered backends** in both Express/TypeScript and ASP.NET Core / C#
+- **Parameterized raw SQL** with ADO.NET, and why parameterization prevents SQL injection
+- **Practical security** — secrets out of code, least-privilege CORS, rate limiting, Helmet, password hashing
+- **QA & security review** — reproducing bugs, isolating root cause, classifying findings by severity, validating the fix before closing
+- **Real deployment** on Vercel + Railway, including Prisma engine config for the Linux musl runtime
+- Working both **solo** and **on a team with defined roles**, using branches, PRs and atomic commits
 
-Plataforma web de gestión integral para el Club Atlético Camioneros: administración
-financiera, control de socios y gestión deportiva, con portales separados por rol
-(Administrativo, Deportivo, Comunidad). Proyecto en equipo; trabajé en el backend
-y como **QA**.
+## Let's Connect!
 
-### Stack
-
-- **Backend:** **.NET 10** Web API en C#, solución de 3 proyectos con cadena de dependencias `ApiGestion → DaoLibrary → EntityLibrary`
-- **Acceso a datos:** **ADO.NET** crudo (`Microsoft.Data.SqlClient`) con queries parametrizadas — sin ORM, sin EF
-- **Base de datos:** **SQL Server** (autenticación Windows)
-- **Frontend:** **Angular 22** — componentes standalone, TypeScript 6
-- **Auth:** JWT
-- **Tests:** **Vitest** (frontend)
-- **Calidad:** Prettier; documentación técnica y de producto versionada (`AGENTS.md`, `estructura-tecnica.md`)
-
-### Mi aporte
-
-- Endpoints del backend (patrón controller `api/[controller]`, DAOs con SQL parametrizado)
-- **QA**: testeo de UI y revisión de seguridad, documentado en `QA-BUGS-Y-SEGURIDAD.md`
-  - Bugs de UI corregidos: asset del logo, ícono nativo del navegador tapando el toggle de contraseña (z-index + ocultar pseudo-elementos), suite de tests rota por un import inexistente, tests de scaffold sin actualizar, checkbox "Recordarme" y link de recuperación muertos
-  - Hallazgos de seguridad: contraseñas en texto plano, contraseña de admin y clave de firma JWT hardcodeadas en archivos versionados
-
-### Aptitudes que aprendí acá
-
-- Trabajar en un **repo de equipo** con ramas por feature/fix, commits enlazados a bugs y coordinación con otros roles
-- **C# / .NET**: arquitectura en capas, inyección de dependencias, configuración por `appsettings`, Swagger, CORS
-- **SQL directo** con ADO.NET: conexiones, comandos parametrizados (y por qué la parametrización previene inyección SQL)
-- Rol de **QA**: reproducir bugs, aislar la causa raíz, documentar estado y fix, validar la corrección antes de cerrar
-- **Revisión de seguridad**: identificar y clasificar hallazgos por severidad, entender que quitar un secreto del código no lo borra del historial de git (hay que rotarlo), y usar `dotnet user-secrets` para mantener secretos fuera del repo
-- Distinguir el **alcance de una rama de QA**: qué se arregla y qué se deriva al equipo de backend
-- Mapear **historias de usuario** (HU-001 Login, HU-002/003 registros, HU-004 pagos) a implementación y deuda técnica
-
----
-
-## Stack general — resumen
-
-**Lenguajes:** TypeScript · JavaScript · C# · SQL · HTML/CSS
-
-**Frontend:** Angular (21 y 22) — standalone components, signals, zoneless, routing, guards, formularios reactivos
-
-**Backend:** Node.js/Express · ASP.NET Core (.NET 10) · arquitectura en capas · REST
-
-**Bases de datos:** PostgreSQL · SQL Server · Prisma ORM · ADO.NET · modelado relacional · migraciones
-
-**Auth & seguridad:** JWT · bcrypt · Helmet · rate limiting · CORS por origen · gestión de secretos (env, user-secrets)
-
-**Infra / deploy:** Vercel · Railway · Supabase · variables de entorno por entorno
-
-**Servicios externos:** Resend (emails transaccionales)
-
-**Herramientas & práctica:** Git/GitHub (ramas, PRs, commits atómicos) · Vitest · Prettier · Swagger · QA y revisión de seguridad · documentación técnica
-
----
-
-## Aptitudes transversales
-
-- Llevar un proyecto **de la idea al deploy** para un cliente real
-- Pensar en **casos borde y consistencia de datos**, no solo el happy path
-- **Seguridad por defecto**: nunca secretos en el código, mínimo privilegio en CORS, hashing de contraseñas
-- Trabajar tanto **solo** (VIZIO) como **en equipo con roles definidos** (CACC)
-- **Documentar** decisiones técnicas para que otro las entienda meses después
+- **Email:** yoelgalera77@gmail.com
+- **LinkedIn:** [joelgaleras](https://www.linkedin.com/in/joelgaleras/)
+- **GitHub:** [1Joee](https://github.com/1Joee)
